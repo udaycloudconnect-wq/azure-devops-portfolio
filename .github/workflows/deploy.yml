@@ -1,0 +1,27 @@
+name: Azure Portfolio CI/CD
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  validate:
+    name: Validate Website
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      - name: Check required files
+        run: |
+          test -f index.html
+          test -f README.md
+          echo "Required files are present."
+
+      - name: Validate HTML file is not empty
+        run: |
+          test -s index.html
+          echo "HTML validation passed."
